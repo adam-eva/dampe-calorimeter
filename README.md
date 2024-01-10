@@ -1,5 +1,4 @@
 # Incidence angle prediction of astroparticles passing through a detector
-## Introduction
 With the DAMPE detector we hope to find evidence of Dark Matter in space. The detector is a satelite in space with a calorimeter, but being in space particles could come from any direction, perfect for a regression task!
 
 ## Dataset

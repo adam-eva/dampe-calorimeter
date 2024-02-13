@@ -11,7 +11,7 @@ The images are tricky, however, as each row is only sensitive to one direction. 
 As the data is simulated, the true location of the incoming particle is known, and its trajectory can be inferred from the x-y coordinates at the top and bottom of the calorimeter.
 
 ### Data Preparation
-**Download the data from [here](https://drive.switch.ch/index.php/s/RrWjbj1UxhO5FKV)** and then unzip the data with `tar -zxvf dampe.tar.gz` into a `data/` folder.
+**Download the data from [here](https://drive.switch.ch/index.php/s/RrWjbj1UxhO5FKV)** and then unzip the data with `tar -zxvf data.tar.gz` into a `data/` folder. After unzipping the `data/` should contain multiple `.npz` files.
 
 We have provided some initial code for data loading in `Introduction.ipynb` which uses `utils.py` to import the data:
 - `get_input_data` : Returns the `images`, `scalar` variables, and the `target`.

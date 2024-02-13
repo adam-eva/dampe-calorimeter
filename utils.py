@@ -1,8 +1,8 @@
+"utils to load and prepare data for the training and prediction of a model."
 import numpy as np
-import json
 import glob
 
-def load_numpy_data_multifile(filelist):
+def load_numpy_data_multifile(filelist:list):
     allindata = []
     for fname in filelist:
         try:
@@ -24,7 +24,7 @@ def load_numpy_data_multifile(filelist):
     return data
 
 
-def prepare_data(data, verbose=False, trkdtype='uint8', normcharge=False):
+def prepare_data(data):
     """
 
     The function prepares the data in the proper-shape numpy arrays
@@ -65,9 +65,9 @@ def prepare_data(data, verbose=False, trkdtype='uint8', normcharge=False):
         'recdata': recdata,
     }
 
-def get_input_data():
+def get_input_data(data_path:str = 'data/tmp_*'):# -> tuple:
     # get all input data
-    data_files = glob.glob('data/tmp_*')
+    data_files = glob.glob(data_path)
     np.random.seed(1234)
     np.random.shuffle(data_files)
     data = load_numpy_data_multifile(data_files)
@@ -76,6 +76,5 @@ def get_input_data():
 
     # 'prepare' input data (in particular, normalize BGO image, etc.)
     data = prepare_data(data)
-    data_target = data['truthdata']
 
-    return data['caloimages'], data['calodata'], data_target
+    return data['caloimages'], data['calodata'], data['truthdata'], data['recdata']

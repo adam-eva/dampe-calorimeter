@@ -134,3 +134,9 @@ dmypy.json
 
 # Personal token file
 github_token.txt
+
+# Vim
+*.swp
+
+# Venv
+.venv/

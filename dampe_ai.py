@@ -39,11 +39,11 @@ def split_train_val_test(dampe_data : dict, val_size : float = 0.2, test_size : 
 #####################################################
 
 def calorimeter_model(dampe_data : dict, model_type):
-    if type == 1:
+    if model_type == 1:
         cal_model = models.model1(dampe_data) 
-    elif type == 2:
+    elif model_type == 2:
         cal_model = models.model2(dampe_data) 
-    elif type == 3:
+    elif model_type == 3:
         cal_model = models.model3(dampe_data) 
     else:
         raise ValueError('Undefined model type : model {}'.format(model_type))
@@ -63,14 +63,14 @@ def std_compile(cal_model):
 
 def std_fit(cal_model, Im_train, Im_val, xy_train, xy_val, epochs):
     """fit the model with standart parameters"""
-    history = cal_model.fit(Im_train_high, xy_train_high, epochs=epochs, 
-                     validation_data=(Im_val_high, xy_val_high))
+    history = cal_model.fit(Im_train, xy_train, epochs=epochs, 
+                     validation_data=(Im_val, xy_val))
 
     return cal_model, history 
 
 def std_compile_fit(cal_model, Im_train, Im_val, xy_train, xy_val, epochs):
     """compile + fit"""
-    std_fit(std_compile(cal_model), Im_train, Im_val, xy_train, xy_val, epochs)
+    cal_model, history = std_fit(std_compile(cal_model), Im_train, Im_val, xy_train, xy_val, epochs)
   
     return cal_model, history
 

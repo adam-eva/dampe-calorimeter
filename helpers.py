@@ -1,3 +1,4 @@
+import pdb
 import os
 import json
 import numpy as np
@@ -73,14 +74,14 @@ def split_xy_intercept(image):
 
 #####################################################################################
 
-def save_model(model, name, overwrite=True)
+def save_model(model, name, overwrite=True):
     """Save keras model"""
     tf_models_dir = os.path.join(os.getcwd(),'models')
 
     if not os.path.isdir(tf_models_dir):
         os.mkdir(tf_models_dir)
         
-    model.save(os.path.join(tf_models_dir, name+'model2.keras'), overwrite=True)
+    model.save(os.path.join(tf_models_dir, name+'.keras'), overwrite=True)
     
 
 def save_model_history(history, filename='history'):

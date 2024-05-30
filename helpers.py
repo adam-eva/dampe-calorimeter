@@ -73,6 +73,16 @@ def split_xy_intercept(image):
 
 #####################################################################################
 
+def save_model(model, name, overwrite=True)
+    """Save keras model"""
+    tf_models_dir = os.path.join(os.getcwd(),'models')
+
+    if not os.path.isdir(tf_models_dir):
+        os.mkdir(tf_models_dir)
+        
+    model.save(os.path.join(tf_models_dir, name+'model2.keras'), overwrite=True)
+    
+
 def save_model_history(history, filename='history'):
     """Save the fiting history to a json format"""
     if not os.path.isdir(DATA_FOLDER):
@@ -87,6 +97,7 @@ def load_model_history(filename):
         history = json.load(ff)
         
     return history
+
 
 #####################################################################################
 
@@ -111,3 +122,5 @@ def split_dico(dico : dict, frac : list = [1]) -> list:
         output_list.append(dico_frac)
 
     return output_list
+
+

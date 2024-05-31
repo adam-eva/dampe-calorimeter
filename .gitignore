@@ -140,3 +140,8 @@ github_token.txt
 
 # Venv
 .venv/
+
+# Images
+.png
+.jpg
+.jpeg

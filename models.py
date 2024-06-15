@@ -56,7 +56,7 @@ def model3(dampe_data : dict):
     return model_small
 
 
-
-
+def model4(dampe_data : dict):
+    """CNN for image and MLP for energy data"""
 
 

@@ -57,20 +57,35 @@ def split_xy_intercept(image):
 
     if image.shape[0] == 1:
         try:
-            x_projection = image[::2 ,:,:]
-            y_projection = image[1::2,:,:]
+            x_projection = image[0,::2 ,:,:]
+            y_projection = image[0,1::2,:,:]
         except:
-            x_projection = image[::2 ,:]
-            y_projection = image[1::2,:]
+            x_projection = image[0,::2 ,:]
+            y_projection = image[0,1::2,:]
     else:
         try:
             x_projection = image[:,::2 ,:,:]
             y_projection = image[:,1::2,:,:]
         except:
-            x_projection = image[:,::2 ,:]
-            y_projection = image[:,1::2,:]
+            x_projection = image[::2 ,:,:]
+            y_projection = image[1::2,:,:]
 
     return x_projection, y_projection
+
+def order_xy_intercept(image):
+    """Split on X and Y and reorder
+       Warning this must be applied to the training test and validation"""
+
+    X, Y = split_xy_intercept(image)
+    if len(image.shape) == 3:
+        XY = np.concatenate((X,Y), axis=0)
+    elif len(image.shape) == 4:
+        XY = np.concatenate((X,Y), axis=1)
+    else:
+        raise ValueError('Unknown input shape')
+
+    return XY
+
 
 #####################################################################################
 

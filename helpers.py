@@ -16,7 +16,7 @@ def get_data_dict():
     # Sower images
     dampe_data['images'] = calorimeter_images / 255. 
     # [Total energy, max pixel energy]
-    dampe_data['calorimeter_data'] = calorimeter_data
+    dampe_data['calorimeter_data'] = calorimeter_data / calorimeter_data.max(axis=0)
     # [x_bot, x_top, y_bot, y_top] Real values (from the simulation)
     dampe_data['data_target'] = data_target
     # [x_bot, x_top, y_bot, y_top] Standart fitting reconstruction 

@@ -18,7 +18,7 @@ def split_train_val_test(dampe_data : dict, val_size : float = 0.2, test_size : 
        do not create a test sample"""
 
     calorimeter_images = dampe_data['images']
-    energy = dampe_data['calorimeter_data']
+    energy             = dampe_data['calorimeter_data']
     data_target        = dampe_data['data_target']
 
     # Validation split 
@@ -54,8 +54,8 @@ def calorimeter_model(dampe_data : dict, model_type):
         cal_model = models.model2(dampe_data) 
     elif model_type == 3:
         cal_model = models.model3(dampe_data) 
-  #  elif model_type == 4:
-  #      cal_model = models.model4(dampe_data)
+    elif model_type == 4:
+        cal_model = models.model4(dampe_data)
     else:
         raise ValueError('Undefined model type : model {}'.format(model_type))
     

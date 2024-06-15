@@ -33,7 +33,7 @@ def model2(dampe_data : dict):
     # Dense Feedforward neural network of the features 
     model.add(layers.Flatten())
     model.add(layers.Dense(units=64,activation='relu'))
-    #model.add(layers.Dense(units=128,activation='relu'))
+    #model.add(layers.Dense(units=64,activation='relu'))
     model.add(layers.Dense(units=4,activation='linear'))
     
     return model 
@@ -72,7 +72,8 @@ def model4(dampe_data : dict):
     # MLP block
     concat  = layers.Concatenate()([conv_flat, energy_input]) # MLP input 
     dense_1 = layers.Dense(units=64,activation='relu')(concat)
-    output  = layers.Dense(units=4,activation='linear')(dense_1)
+    #dense_2 = layers.Dense(units=64,activation='relu')(dense_1)
+    output  = layers.Dense(units=4,activation='linear')(concat)
 
     model = keras.Model(
         inputs  = [image_input, energy_input],

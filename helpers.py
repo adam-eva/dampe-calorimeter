@@ -8,6 +8,10 @@ from utils import get_input_data
 
 DATA_FOLDER= './models/' 
 
+def benchmarked_error(dampe_data):
+    """Compute the benchmarked data mse"""
+    return ((dampe_data['data_target'] - dampe_data['benchmark_data'])**2).mean(axis=1).mean(axis=0)
+
 def get_data_dict():
     """Get the data and order in a dictionary"""
     dampe_data = {}

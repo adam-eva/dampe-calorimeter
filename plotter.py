@@ -4,6 +4,8 @@ from matplotlib.ticker import MaxNLocator
 from matplotlib import colors
 import numpy as np
 
+from helpers import benchmarked_error
+
 figpath = './figures/'
 colors  = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b', '#e377c2',
 '#7f7f7f', '#bcbd22', '#17becf']
@@ -22,11 +24,14 @@ def plot_image(image, loglevel=False, savefig=False,figname=None,image_name=None
 
     plt.xlabel('X, Y [BGO bars]', fontsize=fs)
     plt.ylabel('Z [BGO layers]', fontsize=fs)
+    plt.xticks(np.arange(0, 22, int(1)))
+    plt.yticks(np.arange(0, 14, int(1)))
+    plt.grid()
 
     if image_name:
         ax.set_title(image_name)
     if savefig:
-        plt.savefig('./figures/dampe_'+figname+'.png')
+        plt.savefig(figpath+'/dampe_'+figname+'.png')
     else:
         plt.show()
     
@@ -34,7 +39,7 @@ def plot_image(image, loglevel=False, savefig=False,figname=None,image_name=None
 
 ############################################################################################	
 
-def plot_model_history(models, metrics=['mean_squared_error'], loglevel = False, savefig=False, figname=None, label_str=None):
+def plot_model_history(models, metrics=['mean_squared_error'], loglevel = False, savefig=False, figname=None, label_str=None, bme = None):
     """Plot loss of the model VS epoch"""
     if not isinstance(models, list):
         models = [models]
@@ -57,6 +62,15 @@ def plot_model_history(models, metrics=['mean_squared_error'], loglevel = False,
             color=colors[col_idx],
             linestyle='dashed'
             )
+    if bme:
+        plt.plot(
+        len(history[loss])-1,
+        bme,
+        label='benchmarked MSE',
+        marker='D',
+        markersize=20,
+        color=colors[col_idx+1]
+        ) 
     
     # Force integer x axis  
     ax = fig.gca()

@@ -18,21 +18,30 @@ def split_train_val_test(dampe_data : dict, val_size : float = 0.2, test_size : 
        do not create a test sample"""
 
     calorimeter_images = dampe_data['images']
+    energy = dampe_data['calorimeter_data']
     data_target        = dampe_data['data_target']
 
     # Validation split 
-    Im_train, Im_val, xy_train, xy_val = train_test_split(
-    calorimeter_images, data_target, test_size = val_size
+    Im_train, Im_val, xy_train, xy_val, energy_train, energy_val = train_test_split(
+    calorimeter_images, data_target, energy, test_size = val_size
     )
+       # Im_train, Im_val, xy_train, xy_val = train_test_split(
+       # calorimeter_images, data_target, test_size = val_size
+       # )
     # Test split
     if test_size:
-        Im_val , Im_test , xy_val , xy_test  = train_test_split(
-        Im_val, xy_val, test_size = test_size
+        Im_val , Im_test , xy_val , xy_test, energy_val, energy_test  = train_test_split(
+        Im_val, xy_val, energy_val, test_size = test_size
         )
+    
+   # if test_size:
+   #     Im_val , Im_test , xy_val , xy_test  = train_test_split(
+   #     Im_val, xy_val, test_size = test_size
+   #     )
     else:
         Im_test, xy_test = None, None
 
-    return Im_train, Im_val, Im_test, xy_train, xy_val, xy_test
+    return Im_train, Im_val, Im_test, xy_train, xy_val, xy_test, energy_train, energy_val, energy_test
 
 #####################################################
 ##################### TF MODELS ##################### 
@@ -45,8 +54,8 @@ def calorimeter_model(dampe_data : dict, model_type):
         cal_model = models.model2(dampe_data) 
     elif model_type == 3:
         cal_model = models.model3(dampe_data) 
-    elif model_type == 4:
-        cal_model = models.model4(dampe_data)
+  #  elif model_type == 4:
+  #      cal_model = models.model4(dampe_data)
     else:
         raise ValueError('Undefined model type : model {}'.format(model_type))
     

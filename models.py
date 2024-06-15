@@ -57,6 +57,27 @@ def model3(dampe_data : dict):
 
 
 def model4(dampe_data : dict):
-    """CNN for image and MLP for energy data"""
+    """CNN on all data without pooling
+       Include energy data in the MLP part"""
 
+    image_input  = layers.Input(shape=dampe_data['images'][0].shape, name='calo_images')
+    energy_input = layers.Input(shape=dampe_data['calorimeter_data'][0].shape, name='calo_energy')
+
+    # CNN block
+    conv2d_1  = layers.Conv2D(filters=32, kernel_size=(5, 4), activation='relu')(image_input)
+    conv2d_2  = layers.Conv2D(filters=32, kernel_size=(5, 4), activation='relu')(conv2d_1)
+    conv2d_3  = layers.Conv2D(filters=8, kernel_size=(6, 16), activation='relu')(conv2d_2)
+    conv_flat = layers.Flatten()(conv2d_3)
+
+    # MLP block
+    concat  = layers.Concatenate()([conv_flat, energy_input]) # MLP input 
+    dense_1 = layers.Dense(units=64,activation='relu')(concat)
+    output  = layers.Dense(units=4,activation='linear')(dense_1)
+
+    model = keras.Model(
+        inputs  = [image_input, energy_input],
+        outputs = [output]
+    )
+    
+    return model
 

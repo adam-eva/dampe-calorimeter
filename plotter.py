@@ -1,4 +1,3 @@
-import pdb
 import os
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
@@ -54,12 +53,12 @@ def plot_model_history(models, metrics=['mean_squared_error'], loglevel = False,
         for loss in metrics: 
             plt.plot(
             history[loss],
-            label = loss+label_str[col_idx],
+            label = ' '+label_str[col_idx],
             color=colors[col_idx]
             )
             plt.plot(
             history['val_'+loss],
-            label = 'val_'+loss+label_str[col_idx],
+            #label = 'val_'+loss+label_str[col_idx],
             color=colors[col_idx],
             linestyle='dashed'
             )
@@ -78,7 +77,7 @@ def plot_model_history(models, metrics=['mean_squared_error'], loglevel = False,
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))
     
     plt.xlabel('Epoch',fontsize=fs)
-    plt.ylabel('Metrics',fontsize=fs)
+    plt.ylabel('MSE [mm2]',fontsize=fs)
     plt.legend(loc='best',fontsize=fs)
     plt.grid()
     

@@ -1,0 +1,21 @@
+# We put all the required libraries and packages in this file
+# Install using "pip install -r requirements.txt"
+# Check this each week for new libraries
+
+# Plotting
+matplotlib
+
+# Data science
+numpy
+keras
+tensorflow
+scikit-learn
+
+# For Jupyter notebooks
+ipywidgets
+ipympl
+ipykernel
+
+# Plot
+matplotlib
+

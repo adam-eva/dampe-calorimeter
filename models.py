@@ -72,7 +72,6 @@ def model4(dampe_data : dict):
     # MLP block
     concat  = layers.Concatenate()([conv_flat, energy_input]) # MLP input 
     dense_1 = layers.Dense(units=64,activation='relu')(concat)
-    #dense_2 = layers.Dense(units=64,activation='relu')(dense_1)
     output  = layers.Dense(units=4,activation='linear')(concat)
 
     model = keras.Model(
@@ -81,4 +80,22 @@ def model4(dampe_data : dict):
     )
     
     return model
+
+def model5(dampe_data : dict):
+    """Model for the reordered XY data"""
+    
+    model = models.Sequential()
+    model.add(Input(shape=dampe_data['images'][0].shape))
+    model.add(layers.Conv2D(filters=32, kernel_size=(3, 3), activation='relu'))
+    model.add(layers.Conv2D(filters=16, kernel_size=(5, 5), activation='relu'))
+    model.add(layers.Conv2D(filters=16, kernel_size=(5,12), activation='relu'))
+        
+    # Dense Feedforward neural network of the features 
+    model.add(layers.Flatten())
+    model.add(layers.Dense(units=64,activation='relu'))
+    model.add(layers.Dense(units=64,activation='relu'))
+    model.add(layers.Dense(units=4 ,activation='linear')) 
+
+    return model
+
 

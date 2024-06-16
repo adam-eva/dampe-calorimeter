@@ -56,6 +56,8 @@ def calorimeter_model(dampe_data : dict, model_type):
         cal_model = models.model3(dampe_data) 
     elif model_type == 4:
         cal_model = models.model4(dampe_data)
+    elif model_type == 5:
+        cal_model = models.model5(dampe_data)
     else:
         raise ValueError('Undefined model type : model {}'.format(model_type))
     

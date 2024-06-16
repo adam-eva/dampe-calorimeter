@@ -1,3 +1,4 @@
+import pdb
 import os
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
@@ -125,14 +126,14 @@ def plot_energy(dampe_data, loglevel=False, figname=None):
     plt.figure(figsize=(12,7))
 
     plt.plot(
-    dampe_data['calorimeter_data'][:,0],
-    color=colors[2],
-    label='Total Energy'
-    )
-    plt.plot(
     dampe_data['calorimeter_data'][:,1],
     color=colors[3],
     label='Max Energy'
+    )
+    plt.plot(
+    dampe_data['calorimeter_data'][:,0],
+    color=colors[2],
+    label='Total Energy'
     )
     
     if loglevel == True:

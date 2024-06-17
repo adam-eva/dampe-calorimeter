@@ -25,19 +25,12 @@ def split_train_val_test(dampe_data : dict, val_size : float = 0.2, test_size : 
     Im_train, Im_val, xy_train, xy_val, energy_train, energy_val = train_test_split(
     calorimeter_images, data_target, energy, test_size = val_size
     )
-       # Im_train, Im_val, xy_train, xy_val = train_test_split(
-       # calorimeter_images, data_target, test_size = val_size
-       # )
     # Test split
     if test_size:
         Im_val , Im_test , xy_val , xy_test, energy_val, energy_test  = train_test_split(
         Im_val, xy_val, energy_val, test_size = test_size
         )
     
-   # if test_size:
-   #     Im_val , Im_test , xy_val , xy_test  = train_test_split(
-   #     Im_val, xy_val, test_size = test_size
-   #     )
     else:
         Im_test, xy_test = None, None
 

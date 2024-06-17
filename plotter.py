@@ -53,12 +53,12 @@ def plot_model_history(models, metrics=['mean_squared_error'], loglevel = False,
         for loss in metrics: 
             plt.plot(
             history[loss],
-            label = ' '+label_str[col_idx],
+            label = 'train_'+label_str[col_idx],
             color=colors[col_idx]
             )
             plt.plot(
             history['val_'+loss],
-            #label = 'val_'+loss+label_str[col_idx],
+            label = 'val_'+label_str[col_idx],
             color=colors[col_idx],
             linestyle='dashed'
             )

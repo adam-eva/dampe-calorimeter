@@ -12,7 +12,7 @@ def benchmarked_error(dampe_data):
     """Compute the benchmarked data mse"""
     return ((dampe_data['data_target'] - dampe_data['benchmark_data'])**2).mean(axis=1).mean(axis=0)
 
-def get_data_dict():
+def get_data_dict(normalize_energy = True):
     """Get the data and order in a dictionary"""
     dampe_data = {}
     calorimeter_images, calorimeter_data, data_target, benchmark_data = get_input_data()
@@ -20,7 +20,10 @@ def get_data_dict():
     # Sower images
     dampe_data['images'] = calorimeter_images / 255. 
     # [Total energy, max pixel energy]
-    dampe_data['calorimeter_data'] = calorimeter_data / calorimeter_data.max(axis=0)
+    if normalize_energy:
+        dampe_data['calorimeter_data'] = calorimeter_data / calorimeter_data.max(axis=0)
+    else:
+        dampe_data['calorimeter_data'] = calorimeter_data 
     # [x_bot, x_top, y_bot, y_top] Real values (from the simulation)
     dampe_data['data_target'] = data_target
     # [x_bot, x_top, y_bot, y_top] Standart fitting reconstruction 
@@ -29,9 +32,9 @@ def get_data_dict():
     return dampe_data
 
 
-def sort_data_by_energy(energy='total'):
+def sort_data_by_energy(energy='total', normalize_energy = True):
     """Order the data based on the total shot energy or the max pixel shot energy"""
-    dampe_dic  = get_data_dict()
+    dampe_dic  = get_data_dict(normalize_energy = normalize_energy)
     output_dic = {}
 
     if energy.lower() == 'total':
